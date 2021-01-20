@@ -4,7 +4,7 @@ namespace Microcharts
 {
     /// <summary>
     /// to calculate axis numbers
-    /// https://stackoverflow.com/questions/8506881/nice-label-algorithm-for-charts-with-minimum-ticks?noredirect=1&lq=1#answer-28284941
+    /// https://stackoverflow.com/a/28284941/3105574
     /// </summary>
     public static class NiceScale
     {

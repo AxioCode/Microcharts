@@ -1,6 +1,6 @@
+using SkiaSharp;
 using System.Collections.Generic;
 using System.Linq;
-using SkiaSharp;
 
 namespace Microcharts
 {
@@ -16,9 +16,7 @@ namespace Microcharts
         /// <summary>
         /// Initializes a new instance of the <see cref="T:Microcharts.LineSeriesChart"/> class.
         /// </summary>
-        public LineChart() : base()
-        {
-        }
+        public LineChart() : base() { }
 
         #endregion
 
@@ -45,6 +43,11 @@ namespace Microcharts
         public byte LineAreaAlpha { get; set; } = 32;
 
         /// <summary>
+        /// Line between points color
+        /// </summary>
+        public SKColor LineColor { get; set; }
+
+        /// <summary>
         /// Enables or disables a fade out gradient for the line area in the Y direction
         /// </summary>
         /// <value>The state of the fadeout gradient.</value>
@@ -64,7 +67,7 @@ namespace Microcharts
         /// <inheritdoc/>
         protected override float CalculateHeaderHeight(Dictionary<ChartEntry, SKRect> valueLabelSizes)
         {
-            if(ValueLabelOption == ValueLabelOption.None || ValueLabelOption == ValueLabelOption.OverPoint)
+            if (ValueLabelOption == ValueLabelOption.None || ValueLabelOption == ValueLabelOption.OverPoint)
                 return Margin;
 
             return base.CalculateHeaderHeight(valueLabelSizes);
@@ -136,7 +139,8 @@ namespace Microcharts
                         }
                         else
                         {
-                            point = new SKPoint(drawedPoint.X, drawedPoint.Y);
+                            // Little fix to center the value label
+                            point = new SKPoint(drawedPoint.X, drawedPoint.Y + (valueLabelSize.Height / 2));
                         }
 
                         DrawHelper.DrawLabel(canvas, Orientation.Horizontal, false, itemSize, point, entry.ValueLabelColor.WithAlpha((byte)(255 * AnimationProgress)), valueLabelSize, entry.ValueLabel, ValueLabelTextSize, Typeface);
@@ -155,12 +159,12 @@ namespace Microcharts
                     using (var paint = new SKPaint
                     {
                         Style = SKPaintStyle.Stroke,
-                        Color = s.Color ?? SKColors.White,
+                        Color = LineColor,
                         StrokeWidth = LineSize,
                         IsAntialias = true,
                     })
                     {
-                        if (s.Color == null)
+                        if (s.Color == null && LineColor == null)
                             using (var shader = CreateXGradient(points, s.Entries, s.Color))
                                 paint.Shader = shader;
 
@@ -232,7 +236,7 @@ namespace Microcharts
         /// <inheritdoc/>
         protected override void DrawValueLabel(SKCanvas canvas, Dictionary<ChartEntry, SKRect> valueLabelSizes, float headerWithLegendHeight, SKSize itemSize, SKSize barSize, ChartEntry entry, float barX, float barY, float itemX)
         {
-            if(Series.Count() == 1 && ValueLabelOption == ValueLabelOption.TopOfChart)
+            if (Series.Count() == 1 && ValueLabelOption == ValueLabelOption.TopOfChart)
                 base.DrawValueLabel(canvas, valueLabelSizes, headerWithLegendHeight, itemSize, barSize, entry, barX, barY, itemX);
         }
 

@@ -3,8 +3,8 @@
 
 namespace Microcharts
 {
-    using System;
     using SkiaSharp;
+    using System;
 
     internal static class RadialHelpers
     {

@@ -1,11 +1,10 @@
 // Copyright (c) Aloïs DENIEL. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
+using SkiaSharp;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.InteropServices;
-using SkiaSharp;
 
 namespace Microcharts
 {
@@ -289,7 +288,7 @@ namespace Microcharts
 
             if (Entries.Any(e => !string.IsNullOrEmpty(e.Label)))
             {
-                if(orientation == Orientation.Vertical)
+                if (orientation == Orientation.Vertical)
                 {
                     var maxValueWidth = valueLabelSizes.Max(x => x.Width);
                     if (maxValueWidth > 0)

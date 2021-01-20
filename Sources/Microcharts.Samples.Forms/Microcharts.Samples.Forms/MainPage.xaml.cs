@@ -1,6 +1,6 @@
+using Microcharts.Samples.Forms.Model;
 using System;
 using System.Collections.Generic;
-using Microcharts.Samples.Forms.Model;
 using Xamarin.Forms;
 
 namespace Microcharts.Samples.Forms
