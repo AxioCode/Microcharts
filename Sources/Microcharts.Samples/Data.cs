@@ -1,7 +1,7 @@
+using SkiaSharp;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using SkiaSharp;
 
 namespace Microcharts.Samples
 {
@@ -1136,7 +1136,7 @@ namespace Microcharts.Samples
         {
             List<ChartEntry> entries = new List<ChartEntry>();
 
-            int label = 2020 - ((labelNumber-1) * 5);
+            int label = 2020 - ((labelNumber - 1) * 5);
             var value = r.Next(0, 700);
             do
             {

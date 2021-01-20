@@ -1,6 +1,7 @@
 // Copyright (c) Aloïs DENIEL. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
+using SkiaSharp;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,7 +10,6 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
-using SkiaSharp;
 
 namespace Microcharts
 {
@@ -578,7 +578,7 @@ namespace Microcharts
         /// Raises the property change.
         /// </summary>
         /// <param name="property">The property name.</param>
-        protected void RaisePropertyChanged([CallerMemberName]string property = null)
+        protected void RaisePropertyChanged([CallerMemberName] string property = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
         }
@@ -591,7 +591,7 @@ namespace Microcharts
         /// <param name="value">The new value.</param>
         /// <param name="property">The property name.</param>
         /// <typeparam name="T">The 1st type parameter.</typeparam>
-        protected bool Set<T>(ref T field, T value, [CallerMemberName]string property = null)
+        protected bool Set<T>(ref T field, T value, [CallerMemberName] string property = null)
         {
             if (!EqualityComparer<T>.Equals(field, property))
             {

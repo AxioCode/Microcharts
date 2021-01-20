@@ -12,6 +12,14 @@ namespace Microcharts
         /// <summary>
         /// Right position
         /// </summary>
-        Right
+        Right,
+        /// <summary>
+        /// Top position
+        /// </summary>
+        Top,
+        /// <summary>
+        /// Bottom position
+        /// </summary>
+        Bottom
     }
 }
