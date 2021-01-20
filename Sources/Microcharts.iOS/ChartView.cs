@@ -1,9 +1,8 @@
-﻿using System;
-using Foundation;
+﻿using Foundation;
 using SkiaSharp;
-using UIKit;
 using SkiaSharp.Views.iOS;
-using System.Diagnostics;
+using System;
+using UIKit;
 
 namespace Microcharts.iOS
 {

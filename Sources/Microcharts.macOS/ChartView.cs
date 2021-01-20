@@ -1,7 +1,7 @@
-using System;
 using Foundation;
 using SkiaSharp;
 using SkiaSharp.Views.Mac;
+using System;
 
 namespace Microcharts.macOS
 {
