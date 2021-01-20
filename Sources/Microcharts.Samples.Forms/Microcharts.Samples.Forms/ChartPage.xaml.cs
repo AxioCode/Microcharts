@@ -1,8 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -18,7 +13,7 @@ namespace Microcharts.Samples.Forms
             ExampleChartItem = chartItem;
             InitializeComponent();
             Title = ExampleChartItem.ChartType;
-            
+
         }
 
         public ExampleChartItem ExampleChartItem { get; }
@@ -28,7 +23,7 @@ namespace Microcharts.Samples.Forms
             base.OnAppearing();
 
             chartView.Chart = ExampleChartItem.Chart;
-            if(!chartView.Chart.IsAnimating)
+            if (!chartView.Chart.IsAnimating)
                 chartView.Chart.AnimateAsync(true).ConfigureAwait(false);
         }
     }

@@ -1,8 +1,8 @@
 // Copyright (c) Aloïs DENIEL. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
-using System.Linq;
 using SkiaSharp;
+using System.Linq;
 
 namespace Microcharts
 {
@@ -183,7 +183,7 @@ namespace Microcharts
             return SKShader.CreateLinearGradient(
                 new SKPoint(0, startY),
                 new SKPoint(0, endY),
-                new[] {SKColors.White.WithAlpha(alpha), SKColors.White.WithAlpha(0)},
+                new[] { SKColors.White.WithAlpha(alpha), SKColors.White.WithAlpha(0) },
                 null,
                 SKShaderTileMode.Clamp);
         }

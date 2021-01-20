@@ -1,6 +1,6 @@
+using SkiaSharp;
 using System.Collections.Generic;
 using System.Linq;
-using SkiaSharp;
 
 namespace Microcharts
 {
@@ -64,7 +64,7 @@ namespace Microcharts
         /// <inheritdoc/>
         protected override float CalculateHeaderHeight(Dictionary<ChartEntry, SKRect> valueLabelSizes)
         {
-            if(ValueLabelOption == ValueLabelOption.None || ValueLabelOption == ValueLabelOption.OverPoint)
+            if (ValueLabelOption == ValueLabelOption.None || ValueLabelOption == ValueLabelOption.OverPoint)
                 return Margin;
 
             return base.CalculateHeaderHeight(valueLabelSizes);
@@ -232,7 +232,7 @@ namespace Microcharts
         /// <inheritdoc/>
         protected override void DrawValueLabel(SKCanvas canvas, Dictionary<ChartEntry, SKRect> valueLabelSizes, float headerWithLegendHeight, SKSize itemSize, SKSize barSize, ChartEntry entry, float barX, float barY, float itemX)
         {
-            if(Series.Count() == 1 && ValueLabelOption == ValueLabelOption.TopOfChart)
+            if (Series.Count() == 1 && ValueLabelOption == ValueLabelOption.TopOfChart)
                 base.DrawValueLabel(canvas, valueLabelSizes, headerWithLegendHeight, itemSize, barSize, entry, barX, barY, itemX);
         }
 
