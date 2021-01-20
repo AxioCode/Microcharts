@@ -36,6 +36,13 @@ namespace Microcharts
                 IsAntialias = true,
                 Style = SKPaintStyle.Stroke
             };
+
+            XAxisLinesPaint = new SKPaint
+            {
+                Color = SKColors.Black.WithAlpha(0x50),
+                IsAntialias = true,
+                Style = SKPaintStyle.Stroke
+            };
         }
 
         #endregion
@@ -127,6 +134,11 @@ namespace Microcharts
         /// </summary>
         public bool ShowYAxisLines { get; set; } = false;
 
+        /// <summary>
+        /// Show X Axis Lines?
+        /// </summary>
+        public bool ShowXAxisLines { get; set; } = false;
+
         //TODO : calculate this automatically, based on available area height and text height
         /// <summary>
         /// Y Axis Max Ticks
@@ -139,9 +151,19 @@ namespace Microcharts
         public Position YAxisPosition { get; set; } = Position.Right;
 
         /// <summary>
+        /// Labels Position
+        /// </summary>
+        public Position LabelsPosition { get; set; } = Position.Top;
+
+        /// <summary>
         /// Y Axis Paint
         /// </summary>
         public SKPaint YAxisTextPaint { get; set; }
+
+        /// <summary>
+        /// X Axis Paint
+        /// </summary>
+        public SKPaint XAxisLinesPaint { get; set; }
 
         /// <summary>
         /// Y Axis Paint
@@ -163,6 +185,7 @@ namespace Microcharts
             if (Series != null && entries != null)
             {
                 width = MeasureHelper.CalculateYAxis(ShowYAxisText, ShowYAxisLines, entries, YAxisMaxTicks, YAxisTextPaint, YAxisPosition, width, out float yAxisXShift, out List<float> yAxisIntervalLabels);
+                height = MeasureHelper.CalculateXAxis(ShowXAxisLines, entries, height, out List<float> xAxisIntervalLabels);
                 var firstSerie = Series.FirstOrDefault();
                 var labels = firstSerie.Entries.Select(x => x.Label).ToArray();
                 int nbItems = labels.Length;
@@ -187,6 +210,7 @@ namespace Microcharts
                 var barSize = CalculateBarSize(itemSize, Series.Count());
                 var origin = CalculateYOrigin(itemSize.Height, headerWithLegendHeight);
                 DrawHelper.DrawYAxis(ShowYAxisText, ShowYAxisLines, YAxisPosition, YAxisTextPaint, YAxisLinesPaint, Margin, AnimationProgress, MaxValue, ValueRange, canvas, width, yAxisXShift, yAxisIntervalLabels, headerHeight, itemSize, origin);
+                DrawHelper.DrawXAxis(ShowXAxisLines, XAxisLinesPaint, Margin, AnimationProgress, MaxValue, ValueRange, canvas, height, xAxisIntervalLabels, footerHeight, itemSize, origin);
 
                 int nbSeries = series.Count();
                 for (int i = 0; i < labels.Length; i++)
@@ -211,7 +235,10 @@ namespace Microcharts
                         DrawValueLabel(canvas, valueLabelSizes, headerWithLegendHeight, itemSize, barSize, entry, barX, barY, itemX);
                     }
 
-                    DrawHelper.DrawLabel(canvas, LabelOrientation, false, itemSize, new SKPoint(itemX, height - footerWithLegendHeight + Margin), LabelColor, labelSize, label, LabelTextSize, Typeface);
+                    if (LabelsPosition == Position.Bottom)
+                        DrawHelper.DrawLabel(canvas, LabelOrientation, false, itemSize, new SKPoint(itemX, height - footerWithLegendHeight + Margin), LabelColor, labelSize, label, LabelTextSize, Typeface);
+                    else if (LabelsPosition == Position.Top)
+                        DrawHelper.DrawLabel(canvas, LabelOrientation, false, itemSize, new SKPoint(itemX, footerHeight), LabelColor, labelSize, label, LabelTextSize, Typeface);
                 }
 
                 DrawLegend(canvas, seriesSizes, legendHeight, height, width);

@@ -101,6 +101,17 @@ namespace Microcharts
             return width;
         }
 
+        internal static int CalculateXAxis(bool showXAxisLines, IEnumerable<ChartEntry> entries, int height, out List<float> xAxisIntervalLabels)
+        {
+            xAxisIntervalLabels = new List<float>();
+            if (showXAxisLines)
+            {
+                var enumerable = entries.ToList();
+                xAxisIntervalLabels = enumerable.Select(_ => _.Value).ToList();
+            }
+            return height;
+        }
+
         internal static SKPoint CalculatePoint(float margin, float animationProgress, float maxValue, float valueRange, float value, int i, SKSize itemSize, float origin, float headerHeight, float originX = 0)
         {
             var x = originX + margin + (itemSize.Width / 2) + (i * (itemSize.Width + margin));

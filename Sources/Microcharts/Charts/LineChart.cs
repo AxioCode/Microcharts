@@ -16,9 +16,7 @@ namespace Microcharts
         /// <summary>
         /// Initializes a new instance of the <see cref="T:Microcharts.LineSeriesChart"/> class.
         /// </summary>
-        public LineChart() : base()
-        {
-        }
+        public LineChart() : base() { }
 
         #endregion
 
@@ -43,6 +41,11 @@ namespace Microcharts
         /// </summary>
         /// <value>The line area alpha.</value>
         public byte LineAreaAlpha { get; set; } = 32;
+
+        /// <summary>
+        /// Line between points color
+        /// </summary>
+        public SKColor LineColor { get; set; }
 
         /// <summary>
         /// Enables or disables a fade out gradient for the line area in the Y direction
@@ -136,7 +139,8 @@ namespace Microcharts
                         }
                         else
                         {
-                            point = new SKPoint(drawedPoint.X, drawedPoint.Y);
+                            // Little fix to center the value label
+                            point = new SKPoint(drawedPoint.X, drawedPoint.Y + (valueLabelSize.Height / 2));
                         }
 
                         DrawHelper.DrawLabel(canvas, Orientation.Horizontal, false, itemSize, point, entry.ValueLabelColor.WithAlpha((byte)(255 * AnimationProgress)), valueLabelSize, entry.ValueLabel, ValueLabelTextSize, Typeface);
@@ -155,12 +159,12 @@ namespace Microcharts
                     using (var paint = new SKPaint
                     {
                         Style = SKPaintStyle.Stroke,
-                        Color = s.Color ?? SKColors.White,
+                        Color = LineColor,
                         StrokeWidth = LineSize,
                         IsAntialias = true,
                     })
                     {
-                        if (s.Color == null)
+                        if (s.Color == null && LineColor == null)
                             using (var shader = CreateXGradient(points, s.Entries, s.Color))
                                 paint.Shader = shader;
 
